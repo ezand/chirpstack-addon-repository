@@ -7,7 +7,8 @@ This add-on provides a Chirpstack Gateway Bridge for your network.
 [ChirpStack Gateway Bridge][gateway-bridge] is a service which converts LoRa® Packet Forwarder protocols into a ChirpStack Network Server [common data-format][common-data-format] (JSON and Protobuf). This component is part of the ChirpStack open-source LoRaWAN® Network Server stack.
 
 ## Configuration
-Refer to the [Chirpstack documentation](https://www.chirpstack.io/gateway-bridge/install/config/) for configuration details.
+
+Refer to the [Chirpstack documentation][gateway-bridge-config] for configuration details.
 
 | Key | Mandatory | Default value | Description |
 | --- | --- | --- | ---- |
@@ -69,4 +70,5 @@ Refer to the [Chirpstack documentation](https://www.chirpstack.io/gateway-bridge
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [gateway-bridge]: https://www.chirpstack.io/gateway-bridge/
+[gateway-bridge-config]: https://www.chirpstack.io/gateway-bridge/install/config/
 [common-data-format]: https://github.com/brocaar/chirpstack-api/blob/master/protobuf/gw/gw.proto
