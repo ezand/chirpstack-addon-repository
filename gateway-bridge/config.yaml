@@ -1,0 +1,141 @@
+name: ChirpStack Gateway Bridge
+version: "1"
+url: "https://github.com/ezand/chirpstack-gateway-bridge-addon"
+slug: chirpstack_gateway_bridge
+description: ChirpStack Gateway Bridge
+arch: [armhf, armv7, aarch64, amd64, i386]
+startup: application
+boot: auto
+homeassistant_api: true
+apparmor: true
+panel_icon: mdi:bridge
+panel_title: ChirpStack Gateway Bridge
+options:
+  log_level: 4
+  log_to_syslog: false
+  filters:
+    net_ids: ""
+    join_euis: ""
+  backend: "semtech_udp"
+  semtech_udp:
+    bind: "0.0.0.0:1700"
+    skip_crc_check: false
+    fake_rx_time: false
+  concentratord:
+    crc_check: true
+    event_url: ""
+    command_url: ""
+  basic_station:
+    bind: "0.0.0.0:3001"
+    stats_interval: "30s"
+    ping_interval: "1m0s"
+    read_timeout: "1m5s"
+    write_timeout: "1s"
+    region: "EU868"
+    frequency_min: 863000000
+    frequency_max: 870000000
+  marshaler: "protobuf"
+  mqtt:
+    event_topic_template: "gateway/{{ .GatewayID }}/event/{{ .EventType }}"
+    state_topic_template: "gateway/{{ .GatewayID }}/state/{{ .StateType }}"
+    command_topic_template: "gateway/{{ .GatewayID }}/command/#"
+    state_retained: true
+    keep_alive: "30s"
+    max_reconnect_interval: "1m0s"
+    terminate_on_connect_error: false
+    auth_type: "generic"
+  mqtt_generic:
+    servers: ""
+    username: ""
+    password: ""
+    qos: 0
+    clean_session: true
+    client_id: "cng_ha_addon"
+  mqtt_google:
+    server: "ssl://mqtt.googleapis.com:8883"
+    device_id: ""
+    project_id: ""
+    cloud_region: ""
+    registry_id: ""
+    jwt_expiration: "24h0m0s"
+  mqtt_azure:
+    device_connection_string: ""
+    sas_token_expiration: "24h0m0s"
+    device_id: ""
+    hostname: ""
+  prometheus:
+    enabled: false
+    bind: ""
+  static_meta_data: ""
+  dynamic_meta_data:
+    execution_interval: "1m0s"
+    max_execution_duration: "1s"
+    split_delimiter: "="
+    commands: ""
+schema:
+  log_level: "int(0,5)"
+  log_to_syslog: "bool"
+  backend: "match(^semtech_udp$|^concentratord$|^basic_station$)"
+  filters:
+    net_ids: "str?"
+    join_euis: "str?"
+  semtech_udp:
+    bind: "str?"
+    skip_crc_check: "bool"
+    fake_rx_time: "bool"
+  concentratord:
+    crc_check: "bool"
+    event_url: "str?"
+    command_url: "str?"
+  basic_station:
+    bind: "str?"
+    stats_interval: "str?"
+    ping_interval: "str?"
+    read_timeout: "str?"
+    write_timeout: "str?"
+    region: "str?"
+    frequency_min: "int?"
+    frequency_max: "int?"
+  marshaler: "match(^protobuf$|^json$)"
+  mqtt:
+    event_topic_template: "str?"
+    state_topic_template: "str?"
+    command_topic_template: "str?"
+    state_retained: "bool"
+    keep_alive: "str?"
+    max_reconnect_interval: "str?"
+    terminate_on_connect_error: "bool"
+    auth_type: "match(^generic$|^gcp_cloud_iot_core$|^azure_iot_hub$)"
+  mqtt_generic:
+    servers: "str?"
+    username: "str?"
+    password: "str?"
+    qos: "int(0,2)"
+    clean_session: "bool"
+    client_id: "str?"
+  mqtt_google:
+    server: "str?"
+    device_id: "str?"
+    project_id: "str?"
+    cloud_region: "str?"
+    registry_id: "str?"
+    jwt_expiration: "str?"
+  mqtt_azure:
+    device_connection_string: "str?"
+    sas_token_expiration: "str?"
+    device_id: "str?"
+    hostname: "str?"
+  prometheus:
+    enabled: "bool"
+    bind: "str?"
+  static_meta_data: "str?"
+  dynamic_meta_data:
+    execution_interval: "str?"
+    max_execution_duration: "str?"
+    split_delimiter: "str?"
+    commands: "str?"
+
+ports:
+  "1700/udp": 1700 # Packet forward listener
+  "3001/tcp": 3001 # Webscoket listener
+  "9090/tcp": 9090 # Prometheus metrics server
