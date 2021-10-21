@@ -1,0 +1,21 @@
+name: ChirpStack Network Server
+version: "1"
+url: https://github.com/ezand/chirpstack-addon-repository/tree/main/network-server
+slug: chirpstack_network_server
+description: OpenSource LoRaWAN® Network Server implementation.
+arch: [armhf, armv7, aarch64, amd64, i386]
+startup: application
+boot: auto
+homeassistant_api: true
+apparmor: true
+panel_icon: mdi:access-point-network
+panel_title: ChirpStack Network Server
+options:
+  foo: bar
+schema:
+  foo: "str?"
+
+ports:
+  "8000/udp": 8000 # API server
+  "8010/tcp": 8010 # Roaming API
+  "9091/tcp": 9091 # Prometheus metrics server

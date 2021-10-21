@@ -1,6 +1,6 @@
 name: ChirpStack Gateway Bridge
 version: "1"
-url: "https://github.com/ezand/chirpstack-gateway-bridge-addon"
+url: https://github.com/ezand/chirpstack-addon-repository/tree/main/gateway-bridge
 slug: chirpstack_gateway_bridge
 description: Convert LoRa® Packet Forwarder protocols into JSON or Protobuf.
 arch: [armhf, armv7, aarch64, amd64, i386]

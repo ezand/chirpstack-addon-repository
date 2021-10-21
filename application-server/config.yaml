@@ -1,0 +1,22 @@
+name: ChirpStack Application Server
+version: "1"
+url: https://github.com/ezand/chirpstack-addon-repository/tree/main/application-server
+slug: chirpstack_application_server
+description: OpenSource LoRaWAN® Application Server.
+arch: [armhf, armv7, aarch64, amd64, i386]
+startup: application
+boot: auto
+homeassistant_api: true
+apparmor: true
+panel_icon: mdi:radio-tower
+panel_title: ChirpStack Application Server
+options:
+  foo: bar
+schema:
+  foo: "str?"
+
+ports:
+  "8001/udp": 8001 # Internal API server
+  "8080/udp": 8080 # External API server
+  "8003/udp": 8003 # Join server
+  "9092/tcp": 9092 # Prometheus metrics server

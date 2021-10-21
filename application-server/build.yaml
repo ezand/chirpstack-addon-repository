@@ -1,0 +1,3 @@
+build_from:
+  armhf: homeassistant/armhf-base-debian:latest
+  amd64: homeassistant/amd64-base-debian:latest
