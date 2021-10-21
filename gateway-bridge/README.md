@@ -2,7 +2,7 @@
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 
-This add-on provides a Chirpstack Gateway Bridge for your network.
+This add-on provides a Chirpstack Gateway Bridge for your network. The Gateway Bridge may also be installed [directly on the gateway][gateway-bridge-gateway] instead of using this add-on. Be sure to check out the [deployment strategies][gateway-bridge-deployment] before you consider that option.
 
 [ChirpStack Gateway Bridge][gateway-bridge] is a service which converts LoRa® Packet Forwarder protocols into a ChirpStack Network Server [common data-format][common-data-format] (JSON and Protobuf). This component is part of the ChirpStack open-source LoRaWAN® Network Server stack.
 
@@ -11,7 +11,7 @@ This add-on provides a Chirpstack Gateway Bridge for your network.
 Refer to the [Chirpstack documentation][gateway-bridge-config] for configuration details.
 
 | Key | Mandatory | Default value | Description |
-| --- | --- | --- | ---- |
+:--- | :-- | :-- | :--- |
 | `log_level` | `false` | `4` | debug=5, info=4, warning=3, error=2, fatal=1, panic=0 |
 | `log_to_syslog` | `false` | `false` | When set to `true`, log messages are being written to syslog. |
 | `filters.net_ids` | `false` | `<empty string>` | Filter LoRaWAN frames. Comma-separated string, ex '000000,000001' |
@@ -71,4 +71,6 @@ Refer to the [Chirpstack documentation][gateway-bridge-config] for configuration
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [gateway-bridge]: https://www.chirpstack.io/gateway-bridge/
 [gateway-bridge-config]: https://www.chirpstack.io/gateway-bridge/install/config/
+[gateway-bridge-gateway]: https://www.chirpstack.io/gateway-bridge/gateway/
+[gateway-bridge-deployment]: https://www.chirpstack.io/gateway-bridge/install/deployment/
 [common-data-format]: https://github.com/brocaar/chirpstack-api/blob/master/protobuf/gw/gw.proto

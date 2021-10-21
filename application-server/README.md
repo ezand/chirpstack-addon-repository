@@ -17,7 +17,7 @@ See also the complete list of ChirpStack Application Server [features][applicati
 Refer to the [Chirpstack documentation][application-server-config] for configuration details.
 
 | Key | Mandatory | Default value | Description |
-| --- | --- | --- | ---- |
+:--- | :-- | :-- | :--- |
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

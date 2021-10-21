@@ -19,7 +19,7 @@ The responsibility of the Network Server component is the de-duplication of rece
 Refer to the [Chirpstack documentation][network-server-config] for configuration details.
 
 | Key | Mandatory | Default value | Description |
-| --- | --- | --- | ---- |
+:--- | :-- | :-- | :--- |
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
