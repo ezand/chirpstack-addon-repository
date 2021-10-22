@@ -6,6 +6,19 @@ This add-on provides a Chirpstack Gateway Bridge for your network. The Gateway B
 
 [ChirpStack Gateway Bridge][gateway-bridge] is a service which converts LoRa® Packet Forwarder protocols into a ChirpStack Network Server [common data-format][common-data-format] (JSON and Protobuf). This component is part of the ChirpStack open-source LoRaWAN® Network Server stack.
 
+## Prerequisites
+
+* A running PostgreSQL database.
+* A running Redis server.
+* A supported backend:
+  * `semtech_udp`: a running [Semtech UDP packet-forwarder][semtech-udp]. Might be running on the gateway itself.
+  * `concentratord`: a running LoRa(WAN) [concentrator][contractord] daemon.
+  * `basic_station`: an accessible [basic station][basic-station] websocket.
+* A supported event mechanism:
+  * `mqtt`: a running MQTT broker.
+  * `gcp_cloud_iot_core`: access to a Google Cloud IoT Core MQTT broker.
+  * `azure_iot_hub`: access to an Azure IoT Hub MQTT broker.
+
 ## Configuration
 
 Refer to the [Chirpstack documentation][gateway-bridge-config] for configuration details.
@@ -74,3 +87,6 @@ Refer to the [Chirpstack documentation][gateway-bridge-config] for configuration
 [gateway-bridge-gateway]: https://www.chirpstack.io/gateway-bridge/gateway/
 [gateway-bridge-deployment]: https://www.chirpstack.io/gateway-bridge/install/deployment/
 [common-data-format]: https://github.com/brocaar/chirpstack-api/blob/master/protobuf/gw/gw.proto
+[contractord]: https://www.chirpstack.io/gateway-bridge/backends/concentratord/
+[semtech-udp]: https://www.chirpstack.io/gateway-bridge/backends/semtech-udp/
+[basic-station]: https://www.chirpstack.io/gateway-bridge/backends/basic-station/

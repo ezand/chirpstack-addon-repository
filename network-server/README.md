@@ -8,6 +8,19 @@ his add-on provides a Chirpstack Network Server for your network.
 
 The responsibility of the Network Server component is the de-duplication of received LoRaWAN frames by the LoRa® gateways and for the collected frames handle the:
 
+## Prerequisites
+
+* A running PostgreSQL database.
+* A running Redis database.
+* A supported integration:
+  * `mqtt`: a running MQTT broker.
+  * `amqp`: a running RabbitMQ broker.
+  * `aws_sns`: access to an AWS Simple Notification Service (SNS).
+  * `azure_service_bus`: access to an Azure Service-Bus service.
+  * `gcp_pub_sub`: access to a Google Cloud Pub/Sub service.
+  * `kafka`: access to a Kafka distributed streaming platform.
+  * `postgres`: a running PostgreSQL database.
+
 ## Authentication
 
 * LoRaWAN mac-layer (and mac-commands)
