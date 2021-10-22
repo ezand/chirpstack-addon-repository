@@ -4,9 +4,14 @@
 # This script have to be duplicated in all the services, because Docker doesn't support
 # copying files into container from outside the current working directory.
 
-#CONFIG_PATH=/data/options.json
+SERVICE=chirpstack-gateway-bridge
 
-CONFIG="$(bashio::config '')"
+# Update config based on add-on config
+/scripts/update_config.sh
+
+# Start the Chirpstack service
+bashio::log.info "Starting $SERVICE..."
+/etc/init.d/$SERVICE start
 
 # Keep container running
 tail -f /dev/null

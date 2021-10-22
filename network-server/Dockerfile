@@ -17,7 +17,7 @@ COPY scripts /scripts
 # Base image doesn't use systemctl, disable it before installing packages
 RUN mv /bin/systemctl /bin/systemctl.orig
 
-# Install Chirpstack Gateway Bridge
+# Install Chirpstack service
 RUN /build/prepare_chirpstack.sh
 RUN apt-get install -y ${SERVICE}
 COPY conf/config.toml /etc/${SERVICE}/${SERVICE}.toml
