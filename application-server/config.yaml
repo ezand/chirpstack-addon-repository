@@ -11,9 +11,11 @@ apparmor: true
 panel_icon: mdi:radio-tower
 panel_title: ChirpStack Application Server
 options:
-  foo: bar
+  log_level: 4
+  log_to_syslog: false
 schema:
-  foo: "str?"
+  log_level: "int(0,5)"
+  log_to_syslog: "bool"
 
 ports:
   "8001/udp": 8001 # Internal API server

@@ -11,10 +11,237 @@ apparmor: true
 panel_icon: mdi:access-point-network
 panel_title: ChirpStack Network Server
 options:
-  foo: bar
+  log_level: 4
+  log_to_syslog: false
+  grpc_default_resolver_scheme: passthrough
+  postgresql:
+    dsn: postgres://localhost/chirpstack_ns?sslmode=disable
+    automigrate: true
+    max_open_connections: 0
+    max_idle_connections: 2
+  redis:
+    servers: "localhost:6379"
+    password: ""
+    database: 0
+    cluster: false
+    master_name: ""
+    pool_size: 0
+    tls_enabled: false
+    key_prefix: ""
+  net_id: "000000"
+  deduplication_delay: 200ms
+  device_session_ttl: 744h0m0s
+  get_downlink_data_delay: 100ms
+  band:
+    name: EU868
+    uplink_dwell_time_400ms: false
+    downlink_dwell_time_400ms: false
+    uplink_max_eirp: -1
+    repeater_compatible: false
+  network:
+    installation_margin: 10
+    rx_window: 0
+    rx1_dr_offset: 0
+    rx2_dr: -1
+    rx2_frequency: -1
+    rx2_prefer_on_rx1_dr_lt: 0
+    rx2_prefer_on_link_budget: false
+    gateway_prefer_min_margin: 10
+    downlink_tx_power: -1
+    disable_mac_commands: false
+    disable_adr: false
+    max_mac_command_error_count: 3
+    enabled_uplink_channels: ""
+    adr_plugins: ""
+  network_class_b:
+    ping_slot_dr: 0
+    ping_slot_frequency: 0
+  network_rejoin:
+    enabled: false
+    max_count_n: 0
+    max_time_n: 0
+  scheduler:
+    interval: 1s
+  scheduler_class_c:
+    device_downlink_lock_duration: 2s
+    gateway_downlink_lock_duration: 0s
+    multicast_gateway_delay: 2s
+  api:
+    bind: 0.0.0.0:8000
+  gateway:
+    force_gws_private: false
+    downlink_timeout: 1s
+    backend: mqtt
+    multi_downlink_feature: hybrid
+  mqtt:
+    event_topic: gateway/+/event/+
+    command_topic_template: gateway/{{ .GatewayID }}/command/{{ .CommandType }}
+    server: tcp://localhost:1883
+    username: ""
+    password: ""
+    max_reconnect_interval: 1m0s
+    qos: 0
+    clean_session: true
+    client_id: cns_ha_addon
+  amqp:
+    url: amqp://guest:guest@localhost:5672
+    event_queue_name: gateway-events
+    event_routing_key: gateway.*.event.*
+    command_routing_key_template: gateway.{{ .GatewayID }}.command.{{ .CommandType }}
+  gcp_pub_sub:
+    credentials_file: ""
+    project_id: ""
+    uplink_topic_name: ""
+    downlink_topic_name: ""
+    uplink_retention_duration: 24h0m0s
+  azure_iot_hub:
+    events_connection_string: ""
+    commands_connection_string: ""
+  monitoring:
+    bind: ""
+    healthcheck_endpoint: false
+    device_frame_log_max_history: 0
+    per_device_frame_log_max_history: 10
+    gateway_frame_log_max_history: 0
+    per_gateway_frame_log_max_history: 10
+  prometheus:
+    enabled: false
+    api_timing_histogram: false
+  join_server:
+    resolve_join_eui: false
+    resolve_domain_suffix: .joineuis.lora-alliance.org
+  default_join_server:
+    server: http://localhost:8003
+  network_controller:
+    server: ""
+  roaming:
+    resolve_netid_domain_suffix: .netids.lora-alliance.org
+    bind: ""
+  default_roaming:
+    enabled: false
+    server: ""
+    async: false
+    async_timeout: 0s
+    passive_roaming: false
+    passive_roaming_lifetime: 0s
+    passive_roaming_kek_label: ""
+    authorization: ""
 schema:
-  foo: "str?"
-
+  log_level: int(0,5)
+  log_to_syslog: bool
+  grpc_default_resolver_scheme: "match(^passthrough$|^dns$)"
+  postgresql:
+    dsn: str?
+    automigrate: bool
+    max_open_connections: int?
+    max_idle_connections: int?
+  redis:
+    servers: str?
+    password: str?
+    database: int(0,15)
+    cluster: bool
+    master_name: str?
+    pool_size: int?
+    tls_enabled: bool
+    key_prefix: str?
+  net_id: str?
+  deduplication_delay: str?
+  device_session_ttl: str?
+  get_downlink_data_delay: str?
+  band:
+    name: str?
+    uplink_dwell_time_400ms: bool
+    downlink_dwell_time_400ms: bool
+    uplink_max_eirp: int?
+    repeater_compatible: bool
+  network:
+    installation_margin: int?
+    rx_window: int(0,2)
+    rx1_dr_offset: int?
+    rx2_dr: int?
+    rx2_frequency: int?
+    rx2_prefer_on_rx1_dr_lt: int?
+    rx2_prefer_on_link_budget: bool
+    gateway_prefer_min_margin: int?
+    downlink_tx_power: int?
+    disable_mac_commands: bool
+    disable_adr: bool
+    max_mac_command_error_count: int?
+    enabled_uplink_channels: str?
+    adr_plugins: str?
+  network_class_b:
+    ping_slot_dr: int?
+    ping_slot_frequency: int?
+  network_rejoin:
+    enabled: bool
+    max_count_n: int(0,15)
+    max_time_n: int(0,15)
+  scheduler:
+    interval: str?
+  scheduler_class_c:
+    device_downlink_lock_duration: str?
+    gateway_downlink_lock_duration: str?
+    multicast_gateway_delay: str?
+  api:
+    bind: str?
+  gateway:
+    force_gws_private: bool
+    downlink_timeout: str?
+    backend: "match(^mqtt$|^amqp$|^gcp_pub_sub$|^azure_iot_hub$)"
+    multi_downlink_feature: match(^hybrid$|^multi_only$|^legacy$)
+  mqtt:
+    event_topic: str?
+    command_topic_template: str?
+    server: str?
+    username: str?
+    password: str?
+    max_reconnect_interval: str?
+    qos: int(0,2)
+    clean_session: bool
+    client_id: str?
+  amqp:
+    url: str?
+    event_queue_name: str?
+    event_routing_key: str?
+    command_routing_key_template: str?
+  gcp_pub_sub:
+    credentials_file: str?
+    project_id: str?
+    uplink_topic_name: str?
+    downlink_topic_name: str?
+    uplink_retention_duration: str?
+  azure_iot_hub:
+    events_connection_string: str?
+    commands_connection_string: str?
+  monitoring:
+    bind: str?
+    healthcheck_endpoint: bool
+    device_frame_log_max_history: int?
+    per_device_frame_log_max_history: int?
+    gateway_frame_log_max_history: int?
+    per_gateway_frame_log_max_history: int?
+  prometheus:
+    enabled: bool
+    api_timing_histogram: bool
+  join_server:
+    resolve_join_eui: bool
+    resolve_domain_suffix: str?
+  default_join_server:
+    server: str?
+  network_controller:
+    server: str?
+  roaming:
+    resolve_netid_domain_suffix: str?
+    bind: str?
+  default_roaming:
+    enabled: bool
+    server: str?
+    async: bool
+    async_timeout: str?
+    passive_roaming: bool
+    passive_roaming_lifetime: str?
+    passive_roaming_kek_label: str?
+    authorization: str?
 ports:
   "8000/udp": 8000 # API server
   "8010/tcp": 8010 # Roaming API
