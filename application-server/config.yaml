@@ -13,9 +13,209 @@ panel_title: ChirpStack Application Server
 options:
   log_level: 4
   log_to_syslog: false
+  password_hash_iterations: 100000
+  grpc_default_resolver_scheme: passthrough
+  postgresql:
+    dsn: postgres://localhost/chirpstack_as?sslmode=disable
+    automigrate: true
+    max_open_connections: 0
+    max_idle_connections: 2
+  redis:
+    servers: "localhost:6379"
+    password: ""
+    database: 0
+    cluster: false
+    master_name: ""
+    pool_size: 0
+    tls_enabled: false
+    key_prefix: ""
+  id: 6d5db27e-4ce2-4b2b-b5d7-91f069397978 # TODO autogenerate on first boot
+  openid_connect:
+    enabled: false
+    registration_enabled: false
+    registration_callback_url: ""
+    provider_url: ""
+    client_id: ""
+    client_secret: ""
+    redirect_url: ""
+    logout_url: ""
+    login_label: ""
+  codec_js:
+    max_execution_time: 100ms
+  integration:
+    marshaler: json_v3
+    enabled: ""
+  mqtt:
+    event_topic_template: application/{{ .ApplicationID }}/device/{{ .DevEUI }}/event/{{ .EventType }}
+    command_topic_template: application/{{ .ApplicationID }}/device/{{ .DevEUI }}/command/{{ .CommandType }}
+    retain_events: false
+    server: tcp://localhost:1883
+    username: ""
+    password: ""
+    max_reconnect_interval: 1m0s
+    qos: 0
+    clean_session: true
+    client_id: cas_ha_addon
+  amqp:
+    url: amqp://guest:guest@localhost:5672
+    event_routing_key_template: application.{{ .ApplicationID }}.device.{{ .DevEUI }}.event.{{ .EventType }}
+  aws_sns:
+    aws_region: ""
+    aws_access_key_id: ""
+    aws_secret_access_key: ""
+    topic_arn: ""
+  azure_service_bus:
+    connection_string: ""
+    publish_mode: ""
+    publish_name: ""
+  gcp_pub_sub:
+    project_id: ""
+    topic_name: ""
+  kafka:
+    brokers: localhost:9092
+    tls: false
+    topic: chirpstack_as
+    event_key_template: application.{{ .ApplicationID }}.device.{{ .DevEUI }}.event.{{ .EventType }}
+    username: ""
+    password: ""
+    mechanism: plain
+    algorithm: SHA-512
+  postgresql:
+    dsn: ""
+    max_open_connections: 0
+    max_idle_connections: 2
+  internal_api:
+    bind: 0.0.0.0:8001
+    public_host: localhost:8001
+  external_api:
+    bind: 0.0.0.0:8080
+    jwt_secret: ""
+    cors_allow_origin: ""
+  join_server:
+    bind: 0.0.0.0:8003
+  join_server_kek:
+    as_kek_label: ""
+  metrics:
+    timezone: Local
+  metrics_redis:
+    aggregation_intervals: MINUTE,HOUR,DAY,MONTH
+    minute_aggregation_ttl: 2h0m0s
+    hour_aggregation_ttl: 48h0m0s
+    day_aggregation_ttl: 2160h0m0s
+    month_aggregation_ttl: 17520h0m0s
+  monitoring:
+    bind: ""
+    prometheus_endpoint: false
+    prometheus_api_timing_histogram: false
+    healthcheck_endpoint: false
+    per_device_event_log_max_history: 10
+  prometheus:
+    enabled: false
+    bind: ""
+    api_timing_histogram: false
 schema:
-  log_level: "int(0,5)"
-  log_to_syslog: "bool"
+  log_level: int(0,5)
+  log_to_syslog: bool
+  password_hash_iterations: int?
+  grpc_default_resolver_scheme: match(^passthrough$|^dns$)
+  postgresql:
+    dsn: str?
+    automigrate: bool
+    max_open_connections: int?
+    max_idle_connections: int?
+  redis:
+    servers: str?
+    password: str?
+    database: int(0,15)
+    cluster: bool
+    master_name: str?
+    pool_size: int?
+    tls_enabled: bool
+    key_prefix: str?
+  id: str?
+  openid_connect:
+    enabled: bool
+    registration_enabled: bool
+    registration_callback_url: str?
+    provider_url: str?
+    client_id: str?
+    client_secret: str?
+    redirect_url: str?
+    logout_url: str?
+    login_label: str?
+  codec_js:
+    max_execution_time: str?
+  integration:
+    marshaler: match(^protobuf$|^json$|^json_v3$)
+    enabled: str?
+  mqtt:
+    event_topic_template: str?
+    command_topic_template: str?
+    retain_events: bool
+    server: str?
+    username: str?
+    password: str?
+    max_reconnect_interval: str?
+    qos: int(0,2)
+    clean_session: bool
+    client_id: str?
+  amqp:
+    url: str?
+    event_routing_key_template: str?
+  aws_sns:
+    aws_region: str?
+    aws_access_key_id: str?
+    aws_secret_access_key: str?
+    topic_arn: str?
+  azure_service_bus:
+    connection_string: str?
+    publish_mode: str?
+    publish_name: str?
+  gcp_pub_sub:
+    project_id: str?
+    topic_name: str?
+  kafka:
+    brokers: str?
+    tls: bool
+    topic: str?
+    event_key_template: str?
+    username: str?
+    password: str?
+    mechanism: match(^plain$|^scram$)
+    algorithm: match(^SHA-512$|^SHA-256$)
+  postgresql:
+    dsn: str?
+    max_open_connections: int?
+    max_idle_connections: int?
+  internal_api:
+    bind: str?
+    public_host: str?
+  external_api:
+    bind: str?
+    jwt_secret: str?
+    cors_allow_origin: str?
+  join_server:
+    bind: str?
+  join_server_kek:
+    as_kek_label: str?
+  metrics:
+    timezone: str?
+  metrics_redis:
+    aggregation_intervals: str?
+    minute_aggregation_ttl: str?
+    hour_aggregation_ttl: str?
+    day_aggregation_ttl: str?
+    month_aggregation_ttl: str?
+  monitoring:
+    bind: str?
+    prometheus_endpoint: bool
+    prometheus_api_timing_histogram: bool
+    healthcheck_endpoint: bool
+    per_device_event_log_max_history: int?
+  prometheus:
+    enabled: bool
+    bind: str?
+    api_timing_histogram: bool
 
 ports:
   "8001/udp": 8001 # Internal API server
