@@ -14,4 +14,4 @@ bashio::log.info "Starting $SERVICE..."
 /etc/init.d/$SERVICE start
 
 # Keep container running
-tail -f /dev/null
+tail -F /var/log/$SERVICE/$SERVICE.log
