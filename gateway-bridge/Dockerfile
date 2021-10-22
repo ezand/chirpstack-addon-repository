@@ -3,6 +3,7 @@ FROM $BUILD_FROM
 
 # Consts
 ARG BUILD_DEPS="apt-utils software-properties-common gnupg ca-certificates apt-transport-https dirmngr"
+ARG SERVICE="chirpstack-gateway-bridge"
 
 # Install build dependencies
 RUN apt-get update
@@ -18,8 +19,8 @@ RUN mv /bin/systemctl /bin/systemctl.orig
 
 # Install Chirpstack Gateway Bridge
 RUN /build/prepare_chirpstack.sh
-RUN apt-get install -y chirpstack-gateway-bridge
-COPY conf/config.toml /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+RUN apt-get install -y ${SERVICE}
+COPY conf/config.toml /etc/${SERVICE}/${SERVICE}.toml
 
 # Cleanup
 RUN apt-get remove -y ${BUILD_DEPS}
