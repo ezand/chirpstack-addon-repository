@@ -15,7 +15,7 @@ See also the complete list of ChirpStack Application Server [features][applicati
 ## Prerequisites
 
 * A running PostgreSQL database.
-  * [Enable][application-server-requirements] `pq_trgm` and `hstore` extension
+  * Also [see required PostgreSQL setup][chirpstack-debian] in the `Setup PostgreSQL databases and users` section.
 * A running Redis database.
 * A supported gateway backend:
   * `mqtt`: a running MQTT broker.
@@ -41,4 +41,4 @@ Refer to the [Chirpstack documentation][application-server-config] for configura
 [application-server-api]: https://www.chirpstack.io/application-server/api/
 [application-server-web]: https://www.chirpstack.io/application-server/use/login/
 [application-server-config]: https://www.chirpstack.io/application-server/install/config/
-[application-server-requirements]: https://www.chirpstack.io/application-server/install/requirements/
+[chirpstack-debian]: https://www.chirpstack.io/project/guides/debian-ubuntu/0

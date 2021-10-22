@@ -11,6 +11,7 @@ The responsibility of the Network Server component is the de-duplication of rece
 ## Prerequisites
 
 * A running PostgreSQL database.
+  * Also [see required PostgreSQL setup][chirpstack-debian] in the `Setup PostgreSQL databases and users` section.
 * A running Redis database.
 * A supported integration:
   * `mqtt`: a running MQTT broker.
@@ -43,3 +44,4 @@ Refer to the [Chirpstack documentation][network-server-config] for configuration
 [network-server-config]: https://www.chirpstack.io/network-server/install/config/
 [application-server]: https://www.chirpstack.io/application-server/
 [common-data-format]: https://github.com/brocaar/chirpstack-api/blob/master/protobuf/gw/gw.proto
+[chirpstack-debian]: https://www.chirpstack.io/project/guides/debian-ubuntu/
