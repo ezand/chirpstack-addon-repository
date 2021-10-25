@@ -27,8 +27,90 @@ See also the complete list of ChirpStack Application Server [features][applicati
 
 Refer to the [Chirpstack documentation][application-server-config] for configuration details.
 
-| Key | Mandatory | Default value | Description |
-:--- | :-- | :-- | :--- |
+| Key | Default | Note |
+:--- | :-- | :--- |
+| `log_level` | `4` | |
+| `log_to_syslog` | `false` | |
+| `password_hash_iterations` | `100000` | |
+| `grpc_default_resolver_scheme` | `passthrough` | |
+| `postgresql.dsn` | `postgres://localhost/chirpstack_as?sslmode=disable` | |
+| `postgresql.automigrate` | `true` | |
+| `postgresql.max_open_connections` | `0` | |
+| `postgresql.max_idle_connections` | `2` | |
+| `redis.servers` | `localhost:6379` | Comma-separated string. |
+| `redis.password` | `<empty string>` | |
+| `redis.database` | `0` | |
+| `redis.cluster` | `false` | |
+| `redis.master_name` | `<empty string>` | |
+| `redis.pool_size` | `0` | |
+| `redis.tls_enabled` | `false` | |
+| `redis.key_prefix` | `<empty string>` | |
+| `id` | `<random generated string>` | |
+| `openid_connect.enabled` | `false` | |
+| `openid_connect.registration_enabled` | `false` | |
+| `openid_connect.registration_callback_url` | `<empty string>` | |
+| `openid_connect.provider_url` | `<empty string>` | |
+| `openid_connect.client_id` | `<empty string>` | |
+| `openid_connect.client_secret` | `<empty string>` | |
+| `openid_connect.redirect_url` | `<empty string>` | |
+| `openid_connect.logout_url` | `<empty string>` | |
+| `openid_connect.login_label` | `<empty string>` | |
+| `codec_js.max_execution_time` | `100ms` | |
+| `integration.marshaler` | `json_v3` | |
+| `integration.enabled` | `<empty string>` | |
+| `mqtt.event_topic_template` | `application/{{ .ApplicationID }}/device/{{ .DevEUI }}/event/{{ .EventType }}` | |
+| `mqtt.command_topic_template` | `application/{{ .ApplicationID }}/device/{{ .DevEUI }}/command/{{ .CommandType }}` | |
+| `mqtt.retain_events` | `false` | |
+| `mqtt.server` | `tcp://localhost:1883` | |
+| `mqtt.username` | `<empty string>` | |
+| `mqtt.password` | `<empty string>` | |
+| `mqtt.max_reconnect_interval` | `1m0s` | |
+| `mqtt.qos` | `0` | |
+| `mqtt.clean_session` | `true` | |
+| `mqtt.client_id` | `cas_ha_addon` | |
+| `amqp.url` | `amqp://guest:guest@localhost:5672` | |
+| `amqp.event_routing_key_template` | `application.{{ .ApplicationID }}.device.{{ .DevEUI }}.event.{{ .EventType }}` | |
+| `aws_sns.aws_region` | `<empty string>` | |
+| `aws_sns.aws_access_key_id` | `<empty string>` | |
+| `aws_sns.aws_secret_access_key` | `<empty string>` | |
+| `aws_sns.topic_arn` | `<empty string>` | |
+| `azure_service_bus.connection_string` | `<empty string>` | |
+| `azure_service_bus.publish_mode` | `<empty string>` | |
+| `azure_service_bus.publish_name` | `<empty string>` | |
+| `gcp_pub_sub.project_id` | `<empty string>` | |
+| `gcp_pub_sub.topic_name` | `<empty string>` | |
+| `kafka.brokers` | `localhost:9092` | Comma-separated string. |
+| `kafka.tls` | `false` | |
+| `kafka.topic` | `chirpstack_as` | |
+| `kafka.event_key_template` | `application.{{ .ApplicationID }}.device.{{ .DevEUI }}.event.{{ .EventType }}` | |
+| `kafka.username` | `<empty string>` | |
+| `kafka.password` | `<empty string>` | |
+| `kafka.mechanism` | `plain` | |
+| `kafka.algorithm` | `SHA-512` | |
+| `postgresql.dsn` | `<empty string>` | |
+| `postgresql.max_open_connections` | `0` | |
+| `postgresql.max_idle_connections` | `2` | |
+| `internal_api.bind` | `0.0.0.0:8001` | |
+| `internal_api.public_host` | `localhost:8001` | |
+| `external_api.bind` | `0.0.0.0:8080` | |
+| `external_api.jwt_secret` | `<empty string>` | |
+| `external_api.cors_allow_origin` | `<empty string>` | |
+| `join_server.bind` | `0.0.0.0:8003` | |
+| `join_server_kek.as_kek_label` | `<empty string>` | |
+| `metrics.timezone` | `Local` | |
+| `metrics_redis.aggregation_intervals` | `MINUTE,HOUR,DAY,MONTH` | Comma-separated string. |
+| `metrics_redis.minute_aggregation_ttl` | `2h0m0s` | |
+| `metrics_redis.hour_aggregation_ttl` | `48h0m0s` | |
+| `metrics_redis.day_aggregation_ttl` | `2160h0m0s` | |
+| `metrics_redis.month_aggregation_ttl` | `17520h0m0s` | |
+| `monitoring.bind` | `<empty string>` | |
+| `monitoring.prometheus_endpoint` | `false` | |
+| `monitoring.prometheus_api_timing_histogram` | `false` | |
+| `monitoring.healthcheck_endpoint` | `false` | |
+| `monitoring.per_device_event_log_max_history` | `10` | |
+| `prometheus.enabled` | `false` | |
+| `prometheus.bind` | `<empty string>` | |
+| `prometheus.api_timing_histogram` | `false` | |
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
