@@ -1,25 +1,33 @@
 version: "3.5"
 services:
-  mqtt:
+  mosquitto:
     container_name: mosquitto
     image: eclipse-mosquitto:latest
     ports:
       - "1883:1883"
     volumes:
-      - ./.mosquitto/config:/mqtt/config:ro
-      #- ./.mosquitto/log:/mqtt/log
-      #- ./.mosquitto/data/:/mqtt/data
-    #environment:
-     # - MOSQUITTO_USERNAME=chirpstack
-      #- MOSQUITTO_PASSWORD=chirpstack
+      - $PWD/.dev/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - $PWD/.dev/.mosquitto/log:/mosquitto/log
+      - $PWD/.dev/.mosquitto/data/:/mosquitto/data
 
   postgresql:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USERNAME: chirpstack
-      POSTGRES_PASSWORD: chirpstack
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
-      - ./.postgres:/var/lib/postgresql/data
+      - $PWD/.dev/.postgres:/var/lib/postgresql/data
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass chirpstack
+    ports:
+     - "6379:6379"
+    volumes:
+      - $PWD/.dev/.redis/data:/var/lib/redis
+      - $PWD/.dev/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master

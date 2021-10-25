@@ -1,2 +1,3 @@
-.mosquitto
-.postgres
+.dev/.mosquitto
+.dev/.postgres
+.dev/.redis
