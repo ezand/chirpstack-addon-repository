@@ -1,0 +1,25 @@
+version: "3.5"
+services:
+  mqtt:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./.mosquitto/config:/mqtt/config:ro
+      #- ./.mosquitto/log:/mqtt/log
+      #- ./.mosquitto/data/:/mqtt/data
+    #environment:
+     # - MOSQUITTO_USERNAME=chirpstack
+      #- MOSQUITTO_PASSWORD=chirpstack
+
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USERNAME: chirpstack
+      POSTGRES_PASSWORD: chirpstack
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.postgres:/var/lib/postgresql/data
