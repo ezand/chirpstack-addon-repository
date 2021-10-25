@@ -19,3 +19,13 @@ This add-on provides a Chirpstack [Application Server][application-server] for y
 [gateway-bridge]: https://www.chirpstack.io/gateway-bridge/
 [network-server]: https://www.chirpstack.io/network-server/
 [application-server]: https://www.chirpstack.io/application-server/
+
+## Development
+
+```bash
+# Start local PostgreSQL, Mosquitto and Redis
+$ docker-compose up -d
+
+# Initiate Chirpstack tables and roles (first time after container is created.)
+$ .dev/sql/init_chirpstack.sh
+```
