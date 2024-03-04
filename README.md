@@ -1,3 +1,5 @@
+**Not maintained at the moment**
+
 # Chirpstack Add-On Repository
 
 This is a [Home Assistant][home-assistant] Add-On repository for [Chirpstack][chirpstack] services.
